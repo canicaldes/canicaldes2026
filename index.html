@@ -160,6 +160,35 @@ index.html
   <footer>
     © 2026 Canicaldes · Caldes de Malavella · Tots els drets reservats
   </footer>
+<script>
+  // Activa l'edició dels textos
+  function activarEdicio() {
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      el.contentEditable = true;
+      el.style.border = '1px dashed #0074d9';
+      el.style.padding = '4px';
+    });
+    alert("Ara pots editar els textos directament. Quan acabis, fes clic a 'Desar'.");
+  }
+
+  // Desa els canvis localment
+  function desarCanvis() {
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      localStorage.setItem(el.id, el.innerHTML);
+      el.contentEditable = false;
+      el.style.border = 'none';
+    });
+    alert("Canvis desats! Recarrega la pàgina per veure'ls.");
+  }
+
+  // Carrega els canvis guardats
+  window.onload = function() {
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      const saved = localStorage.getItem(el.id);
+      if (saved) el.innerHTML = saved;
+    });
+  };
+</script>
 
 </body>
 </html>
